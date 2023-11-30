@@ -45,12 +45,12 @@ exports.handler = async (event) => {
                 TableName: process.env.AWS_DYNAMODB_TABLE,
                 Item: {
                     emailId: `${SNSMessage.email}/${timeStamp}`,
-                    status: "Success",
+                    status: "Download success Send status Success",
                     timestamp: timeStamp,
                 },
             };
     
-            await dynamoDBTable.put(dynamoParams).promise();
+            
 
 
             const googleCloudStorage = new Storage({
@@ -108,6 +108,9 @@ exports.handler = async (event) => {
                   console.error(err);
                 });
 
+
+                await dynamoDBTable.put(dynamoParams).promise();
+
                 return;
         }
         else {
@@ -115,7 +118,7 @@ exports.handler = async (event) => {
                 TableName: process.env.AWS_DYNAMODB_TABLE, 
                 Item: {
                   emailId: `${SNSMessage.email}/${timeStamp}`,
-                  status: "Failure",
+                  status: "Download failed Send status Success",
                   timestamp: timeStamp,
               },
             };
@@ -150,7 +153,7 @@ exports.handler = async (event) => {
         TableName: process.env.AWS_DYNAMODB_TABLE, 
         Item: {
           emailId: `${SNSMessage.email}/${timeStamp}`,
-          status: "Failure",
+          status: "Download failed Send status Success",
           timestamp: timeStamp,
       },
     };
@@ -174,7 +177,7 @@ exports.handler = async (event) => {
         });
 
         await dynamoDBTable.put(dynamoParams).promise();
-        
+
         return;
         /* 
         console.error('Error:', error);
