@@ -21,9 +21,8 @@ This AWS Lambda function is designed to handle file uploads to Google Cloud Stor
 2. **Dependencies:**
    Install the required Node.js dependencies by running:
 
-   ```bash
    npm install
-   ```
+   
 
 ## Functionality
 
